@@ -1,0 +1,38 @@
+﻿@model PagedList.IPagedList<AspPaging.Models.Post>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <th>
+            Title
+        </th>
+        <th>
+            Body
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Id)</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Body)
+            </td>
+
+        </tr>
+    }
+
+</table>
+<div class="float-right">
+    @Html.PagedListPager(Model, page => Url.Action("Index", "Post",
+    new { page, pageSize = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>
